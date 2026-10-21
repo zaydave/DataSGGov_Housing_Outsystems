@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="560" viewBox="0 0 1080 560" font-family="DM Sans, Inter, Segoe UI, Helvetica, Arial, sans-serif">
+<defs><filter id="sh" x="-5%" y="-5%" width="110%" height="115%"><feDropShadow dx="0" dy="2" stdDeviation="5" flood-color="#000" flood-opacity=".10"/></filter>
+<marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#7D848C" stroke-width="1.6"/></marker></defs>
+<rect x="12" y="10" width="1056" height="534" rx="6" fill="#fff" filter="url(#sh)"/>
+<rect x="38.0" y="90" width="160" height="60" rx="10" fill="#fff" stroke="#D0D7DE" stroke-width="1.2"/>
+<g transform="translate(50.0,106)"><rect width="28" height="28" rx="7" fill="#4C5866"/><g transform="translate(3,3)"><circle cx="11" cy="12" r="7" fill="none" stroke="#fff" stroke-width="2"/><path d="M11 8 V12 L14 14" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/></g></g>
+<text x="88.0" y="117" font-size="14" font-weight="500" fill="#1F2328">Nightly Timer</text>
+<text x="88.0" y="135" font-size="12" fill="#6E7681">starts the sync</text>
+<path d="M318 82 L388 120 L318 158 L248 120 Z" fill="#F3F4F6" stroke="#D0D7DE" stroke-width="1.2"/>
+<text x="318" y="125" font-size="13" font-weight="500" fill="#1F2328" text-anchor="middle">Data changed?</text>
+<rect x="426.0" y="90" width="168" height="60" rx="10" fill="#fff" stroke="#D0D7DE" stroke-width="1.2"/>
+<g transform="translate(438.0,106)"><rect width="28" height="28" rx="7" fill="#7A4FD1"/><g transform="translate(3,3)"><rect x="5" y="4" width="12" height="15" rx="2" fill="none" stroke="#fff" stroke-width="2"/><path d="M8 9 H14 M8 13 H14" stroke="#fff" stroke-width="2" stroke-linecap="round"/></g></g>
+<text x="476.0" y="117" font-size="14" font-weight="500" fill="#1F2328">Create SyncLog</text>
+<text x="476.0" y="135" font-size="12" fill="#6E7681">new version tag</text>
+<rect x="624.0" y="90" width="176" height="60" rx="10" fill="#fff" stroke="#D0D7DE" stroke-width="1.2"/>
+<g transform="translate(636.0,106)"><rect width="28" height="28" rx="7" fill="#2D7FF9"/><g transform="translate(3,3)"><path d="M5 6 H17 M5 11 H17 M5 16 H12" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/></g></g>
+<text x="674.0" y="117" font-size="14" font-weight="500" fill="#1F2328">Fetch next page</text>
+<text x="674.0" y="135" font-size="12" fill="#6E7681">offset + page size</text>
+<rect x="823.0" y="90" width="204" height="60" rx="10" fill="#fff" stroke="#D0D7DE" stroke-width="1.2"/>
+<g transform="translate(835.0,106)"><rect width="28" height="28" rx="7" fill="#1E9E8F"/><g transform="translate(3,3)"><ellipse cx="11" cy="6.5" rx="6" ry="2.5" fill="none" stroke="#fff" stroke-width="1.8"/><path d="M5 6.5 V16.5 A6 2.5 0 0 0 17 16.5 V6.5" fill="none" stroke="#fff" stroke-width="1.8"/></g></g>
+<text x="873.0" y="117" font-size="14" font-weight="500" fill="#1F2328">Bulk insert</text>
+<text x="873.0" y="135" font-size="12" fill="#6E7681">commit after each page</text>
+<path d="M198 120 H246" fill="none" stroke="#7D848C" stroke-width="1.8" marker-end="url(#ar)"/>
+<path d="M388 120 H424" fill="none" stroke="#7D848C" stroke-width="1.8" marker-end="url(#ar)"/>
+<path d="M594 120 H622" fill="none" stroke="#7D848C" stroke-width="1.8" marker-end="url(#ar)"/>
+<path d="M800 120 H821" fill="none" stroke="#7D848C" stroke-width="1.8" marker-end="url(#ar)"/>
+<text x="406" y="112" font-size="12" fill="#6E7681" text-anchor="middle">yes</text>
+<path d="M318 158 V262" fill="none" stroke="#7D848C" stroke-width="1.8" marker-end="url(#ar)"/>
+<text x="330" y="215" font-size="12" fill="#6E7681" text-anchor="start">no</text>
+<rect x="243.0" y="262" width="150" height="60" rx="10" fill="#fff" stroke="#D0D7DE" stroke-width="1.2"/>
+<g transform="translate(255.0,278)"><rect width="28" height="28" rx="7" fill="#8C959F"/><g transform="translate(3,3)"><rect x="6" y="6" width="10" height="10" rx="1.5" fill="#fff"/></g></g>
+<text x="293.0" y="289" font-size="14" font-weight="500" fill="#1F2328">Stop</text>
+<text x="293.0" y="307" font-size="12" fill="#6E7681">nothing to do</text>
+<path d="M925 262 L995 300 L925 338 L855 300 Z" fill="#F3F4F6" stroke="#D0D7DE" stroke-width="1.2"/>
+<text x="925" y="305" font-size="13" font-weight="500" fill="#1F2328" text-anchor="middle">More pages?</text>
+<path d="M925 150 V260" fill="none" stroke="#7D848C" stroke-width="1.8" marker-end="url(#ar)"/>
+<path d="M995 300 H1040 V48 H712 V88" fill="none" stroke="#7D848C" stroke-width="1.8" marker-end="url(#ar)"/>
+<text x="1030" y="290" font-size="12" fill="#6E7681" text-anchor="end">yes</text>
+<path d="M925 338 V420" fill="none" stroke="#7D848C" stroke-width="1.8" marker-end="url(#ar)"/>
+<text x="937" y="385" font-size="12" fill="#6E7681" text-anchor="start">no</text>
+<rect x="823.0" y="420" width="204" height="60" rx="10" fill="#fff" stroke="#D0D7DE" stroke-width="1.2"/>
+<g transform="translate(835.0,436)"><rect width="28" height="28" rx="7" fill="#2F7D4A"/><g transform="translate(3,3)"><path d="M5.5 11.5 L9.5 15.5 L17 7" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></g></g>
+<text x="873.0" y="447" font-size="14" font-weight="500" fill="#1F2328">Activate version</text>
+<text x="873.0" y="465" font-size="12" fill="#6E7681">one-step IsActive swap</text>
+<path d="M692 150 V420" fill="none" stroke="#7D848C" stroke-width="1.8" marker-end="url(#ar)"/>
+<text x="682" y="300" font-size="12" fill="#6E7681" text-anchor="end">429 or</text>
+<text x="682" y="316" font-size="12" fill="#6E7681" text-anchor="end">time low</text>
+<rect x="624.0" y="420" width="176" height="60" rx="10" fill="#fff" stroke="#D0D7DE" stroke-width="1.2"/>
+<g transform="translate(636.0,436)"><rect width="28" height="28" rx="7" fill="#E9762B"/><g transform="translate(3,3)"><path d="M16 7 A6.5 6.5 0 1 0 17.5 13" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/><path d="M13 5.5 L16.5 7 L15.5 3.5" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g></g>
+<text x="674.0" y="447" font-size="14" font-weight="500" fill="#1F2328">Wake Timer</text>
+<text x="674.0" y="465" font-size="12" fill="#6E7681">resume at last offset</text>
+<path d="M732 420 V150" fill="none" stroke="#7D848C" stroke-width="1.8" stroke-dasharray="4 4" marker-end="url(#ar)"/>
+<text x="742" y="300" font-size="12" fill="#6E7681" text-anchor="start">next run</text>
+<rect x="40" y="395" width="330" height="110" rx="6" fill="#FFF4F1" stroke="#F5C2B5"/>
+<rect x="40" y="395" width="4" height="110" rx="2" fill="#F22800"/>
+<text x="60" y="425" font-size="14" font-weight="500" fill="#1F2328">If any step fails</text>
+<text x="60" y="450" font-size="12.5" fill="#6E7681">The partial rows for this SyncLog are deleted.</text>
+<text x="60" y="468" font-size="12.5" fill="#6E7681">The previous version stays active, so users</text>
+<text x="60" y="486" font-size="12.5" fill="#6E7681">never see half-loaded data.</text>
+</svg>
