@@ -32,17 +32,18 @@ Opening and exporting .oml files is covered in the [ODC docs](https://github.com
 
 ### After installing
 
+The dataset ID (`d_8b84c4ee58e3cfc0ece0d773c8ca6abc`) is a setting in `DataGovSG_Housing` with that value as its default, so both `HDB_Dashboard` and the test suite pick it up with nothing to configure. To point an app at a different dataset, override the setting for that app in the Portal.
+ 
 In the Portal, under each app's Configuration > Settings:
-
+ 
 - `HDB_Dashboard`: add your data.gov.sg API key in the library setting (optional, but it raises the rate limit).
 - `DataGOVSG_Housing_BDDFramework`: set `AuthenticationSecretToken` to a long random string.
 - `BDDFrameworkAPI`: set its token to the same string.
 - GitHub: add the same string as the repository secret `BDD_AUTHTOKEN`, and your ODC domain (for example `https://<your-domain>`) as the repository variable `ODC_BASE_URL`. Both are under Settings > Secrets and variables > Actions.
-
 The token is the same in all three places. If they don't match, the API returns no tests and the workflow fails.
-
+ 
 Then load the data. The dashboard is empty after a fresh install, and the sync Timer only runs on its own at night, so run it once by hand: in the Portal, open `HDB_Dashboard`, go to Timers and click Run now on the sync Timer. If the first load pauses on the rate limit, it carries on by itself.
-
+ 
 To run the tests by hand, open `https://<your-domain>/DataGOVSG_Housing_BDDFramework/Housing?AuthToken=<token>`.
 
 ## Architecture
