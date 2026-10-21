@@ -86,3 +86,13 @@ Paging gives us that. Each page is committed on its own, so if anything stops th
 The tests use the dataset ID from the library's own setting, so they also check that the library is configured correctly. LIB-03 matters most for the sync, which relies on each offset returning new rows.
 
 GitHub Actions runs the suite through the [BDD Framework API](https://www.outsystems.com/forge/component-documentation/15746/bdd-framework-api-odc/0), on demand after publishing and every night at 02:00 MYT. Each run shows a results table, and the run fails if any scenario fails. The test token is stored as a GitHub secret and never printed. See [`.github/workflows/bdd-tests.yml`](.github/workflows/bdd-tests.yml), and the Actions tab for the run history.
+
+## Application Objects (AO)
+
+OutSystems licenses by Application Objects. Each screen, entity (static entities included) and API method counts as one AO ([explainer](https://itnext.io/outsystems-application-objects-unlimited-for-everyone-1c48887575d2)), and ODC counts them on your production stages ([ODC docs](https://github.com/OutSystems/docs-odc/blob/main/src/eap/manage-platform-app-lifecycle/subscription-console.md)). In today's market, AO cost is one of the main reasons teams hesitate to pick OutSystems.
+
+This project doesn't do any AO saving. It's built the straightforward way so it's easy to read and assess.
+
+In a real project we would cut screens and static entities using front-end practices and platform-level solutions, while keeping the core business entities as they are. In my experience this often cuts the AO count by more than half without touching the core data model. None of this is in the official documentation. It comes from delivering OutSystems projects, and knowing which shortcuts are safe and which ones cost you later.
+
+The test suite, `DataGOVSG_Housing_BDDFramework`, doesn't add to the bill, because it only runs in development and never goes to production.
