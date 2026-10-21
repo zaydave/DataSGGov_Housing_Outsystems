@@ -1,8 +1,7 @@
 # HDB Resale Explorer
-
 A dashboard for exploring HDB resale flat prices in Singapore, built on OutSystems Developer Cloud (ODC) with public data from [data.gov.sg](https://data.gov.sg).
 
-Live app: https://personal-dfwoxjal-dev.outsystems.app/HDB_Dashboard
+Live app (no login needed): https://personal-dfwoxjal-dev.outsystems.app/HDB_Dashboard
 
 ## Apps
 
@@ -14,17 +13,17 @@ Theme
 - `DataGovSG_Theme` (library): a single stylesheet that restyles OutSystems UI. Apps pick up the design by referencing it.
 
 BDD
-- `DataGovSG_Housing_BDDFramework` (test suite): automated tests for the library, run from GitHub Actions.
+- `DataGOVSG_Housing_BDDFramework` (test suite): automated tests for the library, run from GitHub Actions.
 
 ## Install
 
 The four assets are in the [`oml`](oml) folder. Install them in this order, because each one depends on the ones before it. You'll need ODC Studio connected to your ODC organization.
 
-1. **BDD Framework from Forge.** In the ODC Portal, open Forge and install [BDD Framework (ODC)](https://www.outsystems.com/forge/component-overview/15745/bdd-framework-odc) and [BDD Framework API (ODC)](https://www.outsystems.com/forge/component-overview/15746/bdd-framework-api-odc).
-2. **`DataGovSG_Housing.oml`.** In ODC Studio, go to Menu > Organization > Open Files, pick the file and click 1-Click Publish. Then release it: in the Portal, go to Apps, filter by Library, open the library and choose Release Library. Apps can't use a library until its first version is released.
-3. **`DataGovSG_Theme.oml`.** Same as step 2: open, publish, release.
-4. **`HDB_Dashboard.oml`.** Open and publish.
-5. **`DataGovSG_Housing_BDDFramework.oml`.** Open and publish.
+1. BDD Framework from Forge. In the ODC Portal, open Forge and install [BDD Framework (ODC)](https://www.outsystems.com/forge/component-overview/15745/bdd-framework-odc) and [BDD Framework API (ODC)](https://www.outsystems.com/forge/component-overview/15746/bdd-framework-api-odc).
+2. `DataGovSG_Housing.oml`: In ODC Studio, go to Menu > Organization > Open Files, pick the file and click 1-Click Publish. Then release it: in the Portal, go to Apps, filter by Library, open the library and choose Release Library. Apps can't use a library until its first version is released.
+3. `DataGovSG_Theme.oml`: same as step 2: open, publish, release.
+4. `HDB_Dashboard.oml`: open and publish.
+5. `DataGOVSG_Housing_BDDFramework.oml`: open and publish.
 
 If Studio says a dependency is missing when you open a file, install the earlier step first and open the file again.
 
@@ -35,12 +34,15 @@ Opening and exporting .oml files is covered in the [ODC docs](https://github.com
 In the Portal, under each app's Configuration > Settings:
 
 - `HDB_Dashboard`: add your data.gov.sg API key in the library setting (optional, but it raises the rate limit).
-- `DataGovSG_Housing_BDDFramework`: set `AuthenticationSecretToken` to a long random string.
+- `DataGOVSG_Housing_BDDFramework`: set `AuthenticationSecretToken` to a long random string.
 - `BDDFrameworkAPI`: set its token to the same string.
+- GitHub: add the same string as the repository secret `BDD_AUTHTOKEN`, and your ODC domain (for example `https://<your-domain>`) as the repository variable `ODC_BASE_URL`. Both are under Settings > Secrets and variables > Actions.
 
-Then load the data: in the Portal, open `HDB_Dashboard`, go to Timers and click Run now on the sync Timer. If the first load pauses on the rate limit, it carries on by itself.
+The token is the same in all three places. If they don't match, the API returns no tests and the workflow fails.
 
-To run the tests by hand, open `https://<your-domain>/DataGovSG_Housing_BDDFramework/Housing?AuthToken=<token>`.
+Then load the data. The dashboard is empty after a fresh install, and the sync Timer only runs on its own at night, so run it once by hand: in the Portal, open `HDB_Dashboard`, go to Timers and click Run now on the sync Timer. If the first load pauses on the rate limit, it carries on by itself.
+
+To run the tests by hand, open `https://<your-domain>/DataGOVSG_Housing_BDDFramework/Housing?AuthToken=<token>`.
 
 ## Architecture
 
@@ -66,13 +68,13 @@ Paging gives us that. Each page is committed on its own, so if anything stops th
 
 1. Read the dataset's `lastUpdatedAt`. If nothing changed since the last sync, stop.
 2. Fetch a page, bulk insert it, commit, and move to the next one.
-3. If time is running out or the API returns 429, wake the Timer and continue from the last page.
+3. If the API returns 429, wake the Timer and continue from the last page.
 4. Once every row is in, switch the new version on in one step.
 5. If the sync fails, delete the partial rows. The previous version stays live, so users never see half the data.
 
 ## Tests
 
-`DataGovSG_Housing_BDDFramework` tests the library against the live API:
+`DataGOVSG_Housing_BDDFramework` tests the library against the live API:
 
 - LIB-01: a search with limit 10 returns 10 records and a total above 0
 - LIB-02: the dataset metadata returns a `lastUpdatedAt` that isn't in the future
