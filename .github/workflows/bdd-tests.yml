@@ -1,0 +1,66 @@
+# Runs the OutSystems BDD Framework test suites through the BDD Framework API.
+# Each suite = one test screen. Every scenario on that screen runs in one call.
+name: BDD Tests
+
+on:
+  workflow_dispatch:          # "Run workflow" button, use after publishing in ODC
+  schedule:
+    - cron: "0 18 * * *"      # nightly 02:00 MYT (cron is UTC)
+
+permissions:
+  contents: read
+
+jobs:
+  bdd:
+    name: ${{ matrix.suite.app }} / ${{ matrix.suite.screen }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        suite:
+          - { app: DataGOVSG_Housing_BDDFramework, screen: Housing }
+          # Add one line per new test screen, e.g. the HDB_Dashboard suite
+
+    steps:
+      - name: Run suite
+        env:
+          BDD_TOKEN: ${{ secrets.BDD_AUTHTOKEN }}
+          BASE_URL: ${{ vars.ODC_BASE_URL }}
+          APP: ${{ matrix.suite.app }}
+          SCREEN: ${{ matrix.suite.screen }}
+        run: |
+          curl -sS --fail-with-body --max-time 600 \
+            -H "Authorization: Bearer $BDD_TOKEN" \
+            "$BASE_URL/BDDFrameworkAPI/rest/TestTrigger/BDDTestRunner/$APP/$SCREEN" \
+            -o result.json
+
+      - name: Report results
+        if: always()
+        env:
+          APP: ${{ matrix.suite.app }}
+          SCREEN: ${{ matrix.suite.screen }}
+        run: |
+          # Never print the raw response: SuiteScreen contains the auth token.
+          if [ ! -s result.json ] || ! jq -e . result.json > /dev/null 2>&1; then
+            echo "::error::No valid response from the BDD Framework API"
+            exit 1
+          fi
+
+          {
+            echo "### $APP / $SCREEN"
+            jq -r '"**Result:** " + (if .IsSuccess then "✅ Passed" else "❌ Failed" end)
+                   + " (\(.SuccessfulScenarios) of \(.TestScenarioResults | length) scenarios passed)"' result.json
+            echo
+            echo "| Scenario | Description | Tags | Result |"
+            echo "|---|---|---|---|"
+            jq -r '.TestScenarioResults[]
+                   | "| \(.ScenarioId) | \(.Description) | \(.Tags | join(", ")) | \(if .IsSuccess then "✅" else "❌" end) |"' result.json
+          } >> "$GITHUB_STEP_SUMMARY"
+
+          # Show each failed scenario's step report
+          jq -r '.TestScenarioResults[] | select(.IsSuccess | not)
+                 | "::error title=\(.ScenarioId)::\(.Description) - " + (.FailureReport | gsub("\r?\n"; " "))' result.json
+
+          # Fail if any scenario failed, or if no scenarios ran at all
+          jq -e '.IsSuccess and (.TestScenarioResults | length) > 0' result.json > /dev/null
