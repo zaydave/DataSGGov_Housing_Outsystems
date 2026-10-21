@@ -1,4 +1,5 @@
 # HDB Resale Explorer
+
 A dashboard for exploring HDB resale flat prices in Singapore, built on OutSystems Developer Cloud (ODC) with public data from [data.gov.sg](https://data.gov.sg).
 
 Live app (no login needed): https://personal-dfwoxjal-dev.outsystems.app/HDB_Dashboard
@@ -74,10 +75,14 @@ Paging gives us that. Each page is committed on its own, so if anything stops th
 
 ## Tests
 
-`DataGOVSG_Housing_BDDFramework` tests the library against the live API:
+`DataGOVSG_Housing_BDDFramework` tests the library against the live API. Each scenario is written as Given / When / Then.
 
-- LIB-01: a search with limit 10 returns 10 records and a total above 0
-- LIB-02: the dataset metadata returns a `lastUpdatedAt` that isn't in the future
-- LIB-03: searching with an invalid resource ID returns a handled error
+| ID | Scenario | Given | When | Then |
+|---|---|---|---|---|
+| LIB-01 | Search returns HDB resale data | a limit of 10 | I search the datastore | 10 records are returned and the total is above 0 |
+| LIB-02 | Metadata returns a valid last updated date | the HDB resale dataset configured in the library | I get the dataset metadata | `lastUpdatedAt` is set and not in the future |
+| LIB-03 | Paging returns the next set of records | a page size of 10 | I fetch page 1 and page 2 | both pages are full and page 2 starts with a different record |
 
-GitHub Actions runs the suite through the [BDD Framework API](https://www.outsystems.com/forge/component-documentation/15746/bdd-framework-api-odc/0), on demand after publishing and every night at 02:00 MYT. The run fails if any scenario fails. The test token is stored as a GitHub secret and never printed. See [`.github/workflows/bdd-tests.yml`](.github/workflows/bdd-tests.yml).
+The tests use the dataset ID from the library's own setting, so they also check that the library is configured correctly. LIB-03 matters most for the sync, which relies on each offset returning new rows.
+
+GitHub Actions runs the suite through the [BDD Framework API](https://www.outsystems.com/forge/component-documentation/15746/bdd-framework-api-odc/0), on demand after publishing and every night at 02:00 MYT. Each run shows a results table, and the run fails if any scenario fails. The test token is stored as a GitHub secret and never printed. See [`.github/workflows/bdd-tests.yml`](.github/workflows/bdd-tests.yml), and the Actions tab for the run history.
