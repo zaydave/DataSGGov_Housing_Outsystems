@@ -43,8 +43,7 @@
 <text x="873.0" y="447" font-size="14" font-weight="500" fill="#1F2328">Activate version</text>
 <text x="873.0" y="465" font-size="12" fill="#6E7681">one-step IsActive swap</text>
 <path d="M692 150 V420" fill="none" stroke="#7D848C" stroke-width="1.8" marker-end="url(#ar)"/>
-<text x="682" y="300" font-size="12" fill="#6E7681" text-anchor="end">429 or</text>
-<text x="682" y="316" font-size="12" fill="#6E7681" text-anchor="end">time low</text>
+<text x="682" y="308" font-size="12" fill="#6E7681" text-anchor="end">HTTP 429</text>
 <rect x="624.0" y="420" width="176" height="60" rx="10" fill="#fff" stroke="#D0D7DE" stroke-width="1.2"/>
 <g transform="translate(636.0,436)"><rect width="28" height="28" rx="7" fill="#E9762B"/><g transform="translate(3,3)"><path d="M16 7 A6.5 6.5 0 1 0 17.5 13" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/><path d="M13 5.5 L16.5 7 L15.5 3.5" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g></g>
 <text x="674.0" y="447" font-size="14" font-weight="500" fill="#1F2328">Wake Timer</text>
