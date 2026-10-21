@@ -1,7 +1,5 @@
 # HDB Resale Explorer
 
-[![BDD Tests](https://github.com/<github-user>/<repo>/actions/workflows/bdd-tests.yml/badge.svg)](https://github.com/<github-user>/<repo>/actions/workflows/bdd-tests.yml)
-
 A dashboard for exploring HDB resale flat prices in Singapore, built on OutSystems Developer Cloud (ODC) with public data from [data.gov.sg](https://data.gov.sg).
 
 Live app: https://personal-dfwoxjal-dev.outsystems.app/HDB_Dashboard
