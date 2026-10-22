@@ -18,7 +18,7 @@ BDD
 
 ## Install
 
-The four assets are in the [`oml`](oml) folder. Install them in this order, because each one depends on the ones before it. You'll need ODC Studio connected to your ODC organization.
+The four assets are in the [`oml`](oml) folder. Install them in this order. You'll need ODC Studio.
 
 1. BDD Framework from Forge. In the ODC Portal, open Forge and install [BDD Framework (ODC)](https://www.outsystems.com/forge/component-overview/15745/bdd-framework-odc) and [BDD Framework API (ODC)](https://www.outsystems.com/forge/component-overview/15746/bdd-framework-api-odc).
 2. `DataGovSG_Housing.oml`: In ODC Studio, go to Menu > Organization > Open Files, pick the file and click 1-Click Publish. Then release it: in the Portal, go to Apps, filter by Library, open the library and choose Release Library. Apps can't use a library until its first version is released.
